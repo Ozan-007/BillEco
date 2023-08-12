@@ -1,1 +1,2 @@
 EKo naber??
+Ozan naber 
