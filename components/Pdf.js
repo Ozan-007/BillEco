@@ -33,7 +33,7 @@ export default function Pdf() {
 	  <article>
 		  <h1>Recipient</h1>
 		  <address contenteditable>
-			  <p>Some Company<br>${name}</p>
+			  <p>${name} Company
 		  </address>
 		  <table class="meta">
 			  <tr>
