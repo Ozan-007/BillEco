@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Button } from "react-native";
 import { printToFileAsync } from "expo-print";
 import { shareAsync } from "expo-sharing";
-import { htmlStyles } from "./Pdfcss";
+import { htmlStyles } from "./Pdf-css";
 
 export default function Pdf() {
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [country, setCountry] = useState("");
+  const [street, setStreet] = useState("");
+  const [apt, setApt] = useState("");
+  const [postCode, setPostCode] = useState("");
+  const [city, setCity] = useState("");
+  const [province, setProvince] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
 
   const html = `<html>
   
@@ -24,16 +30,16 @@ export default function Pdf() {
 	  <header>
 		  <h1>Invoice</h1>
 		  <address contenteditable>
-			  <p>Jonathan Neal</p>
-			  <p>101 E. Chapman Ave<br>Orange, CA 92866</p>
-			  <p>(800) 555-1234</p>
+			  <p>${name}</p>
+			  <p>${street}<br>${country} , ${city}, ${province}, ${postCode}</p>
+			  <p>${phoneNumber}</p>
 		  </address>
-		  <span><img alt="" src="http://www.jonathantneal.com/examples/invoice/logo.png"><input type="file" accept="image/*"></span>
+		 
 	  </header>
 	  <article>
 		  <h1>Recipient</h1>
 		  <address contenteditable>
-			  <p>Some Company<br>${name}</p>
+			  <p>${name}</p>
 		  </address>
 		  <table class="meta">
 			  <tr>
@@ -46,7 +52,7 @@ export default function Pdf() {
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Amount Due</span></th>
-				  <td><span id="prefix" contenteditable>$</span><span>${amount}</span></td>
+				  <td><span id="prefix" contenteditable>$</span><span></span></td>
 			  </tr>
 		  </table>
 		  <table class="inventory">
@@ -65,7 +71,7 @@ export default function Pdf() {
 					  <td><span contenteditable>Experience Review</span></td>
 					  <td><span data-prefix>$</span><span contenteditable>150.00</span></td>
 					  <td><span contenteditable>4</span></td>
-					  <td><span data-prefix>$</span><span>${amount}</span></td>
+					  <td><span data-prefix>$</span><span></span></td>
 				  </tr>
 			  </tbody>
 		  </table>
@@ -73,7 +79,7 @@ export default function Pdf() {
 		  <table class="balance">
 			  <tr>
 				  <th><span contenteditable>Total</span></th>
-				  <td><span data-prefix>$</span><span>${amount}</span></td>
+				  <td><span data-prefix>$</span><span></span></td>
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Amount Paid</span></th>
@@ -81,7 +87,7 @@ export default function Pdf() {
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Balance Due</span></th>
-				  <td><span data-prefix>$</span><span>${amount}</span></td>
+				  <td><span data-prefix>$</span><span></span></td>
 			  </tr>
 		  </table>
 	  </article>
@@ -107,25 +113,47 @@ export default function Pdf() {
   };
   return (
     <View style={styles.container}>
-      <Text>Service Name:</Text>
+      <Text>Company Name:</Text>
       <TextInput
-        placeholder="Service"
+        placeholder="Company Name"
         style={styles.input}
         onChangeText={(value) => setName(value)}
       />
 
-      <Text>Price</Text>
+      <Text>Country:</Text>
       <TextInput
-        placeholder="Amount"
         style={styles.input}
-        onChangeText={(value) => setAmount(value)}
+        onChangeText={(value) => setCountry(value)}
+      />
+      <Text>Street:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setStreet(value)}
+      />
+      <Text>Apt, Suite:</Text>
+      <TextInput style={styles.input} onChangeText={(value) => setApt(value)} />
+      <Text>Postal Code:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setPostCode(value)}
+      />
+      <Text>City:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setCity(value)}
+      />
+      <Text>Province/State:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setProvince(value)}
+      />
+      <Text>Phone Number:</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={(value) => setPhoneNumber(value)}
       />
 
       <Button title="Generate PDF" onPress={generatePdf} />
-
-      <Text style={styles.result}>
-        Service name: {name}, amount: {amount}
-      </Text>
     </View>
   );
 }
@@ -145,3 +173,4 @@ const styles = StyleSheet.create({
     width: 200,
   },
 });
+
