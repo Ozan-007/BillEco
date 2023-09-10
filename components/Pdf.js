@@ -57,22 +57,19 @@ export default function Pdf() {
 				  <tr>
 					  <th><span contenteditable>Service</span></th>
 					  <th><span contenteditable>Description</span></th>
-					//   <th><span contenteditable>Rate</span></th>
 					  <th><span contenteditable>Quantity</span></th>
 					  <th><span contenteditable>Price</span></th>
 				  </tr>
 			  </thead>
 			  <tbody>
 				  <tr>
-					  <td><a class="cut">-</a><span contenteditable>${service}</span></td>
+					  <td><a class="cut"></a><span contenteditable>${service}</span></td>
 					  <td><span contenteditable>${description}</span></td>
-					//   <td><span data-prefix>$</span><span contenteditable></span></td>
 					  <td><span contenteditable>${quantity}</span></td>
 					  <td><span data-prefix>€</span><span>${price}</span></td>
 				  </tr>
 			  </tbody>
 		  </table>
-		//   <a class="add">+</a>
 		  <table class="balance">
 			  <tr>
 				  <th><span contenteditable>Total</span></th>
