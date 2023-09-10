@@ -6,7 +6,10 @@ import { htmlStyles } from "./Pdfcss";
 
 export default function Pdf() {
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
+  const [service, setService] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
   const html = `<html>
   
@@ -42,46 +45,46 @@ export default function Pdf() {
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Date</span></th>
-				  <td><span contenteditable>January 1, 2012</span></td>
+				  <td><span contenteditable></span></td>
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Amount Due</span></th>
-				  <td><span id="prefix" contenteditable>$</span><span>${amount}</span></td>
+				  <td><span id="prefix" contenteditable>€</span><span></span></td>
 			  </tr>
 		  </table>
 		  <table class="inventory">
 			  <thead>
 				  <tr>
-					  <th><span contenteditable>Item</span></th>
+					  <th><span contenteditable>Service</span></th>
 					  <th><span contenteditable>Description</span></th>
-					  <th><span contenteditable>Rate</span></th>
+					//   <th><span contenteditable>Rate</span></th>
 					  <th><span contenteditable>Quantity</span></th>
 					  <th><span contenteditable>Price</span></th>
 				  </tr>
 			  </thead>
 			  <tbody>
 				  <tr>
-					  <td><a class="cut">-</a><span contenteditable>Front End Consultation</span></td>
-					  <td><span contenteditable>Experience Review</span></td>
-					  <td><span data-prefix>$</span><span contenteditable>150.00</span></td>
-					  <td><span contenteditable>4</span></td>
-					  <td><span data-prefix>$</span><span>${amount}</span></td>
+					  <td><a class="cut">-</a><span contenteditable>${service}</span></td>
+					  <td><span contenteditable>${description}</span></td>
+					//   <td><span data-prefix>$</span><span contenteditable></span></td>
+					  <td><span contenteditable>${quantity}</span></td>
+					  <td><span data-prefix>€</span><span>${price}</span></td>
 				  </tr>
 			  </tbody>
 		  </table>
-		  <a class="add">+</a>
+		//   <a class="add">+</a>
 		  <table class="balance">
 			  <tr>
 				  <th><span contenteditable>Total</span></th>
-				  <td><span data-prefix>$</span><span>${amount}</span></td>
+				  <td><span data-prefix>€</span><span>${price * quantity}</span></td>
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Amount Paid</span></th>
-				  <td><span data-prefix>$</span><span contenteditable>0.00</span></td>
+				  <td><span data-prefix>€</span><span contenteditable>0.00</span></td>
 			  </tr>
 			  <tr>
 				  <th><span contenteditable>Balance Due</span></th>
-				  <td><span data-prefix>$</span><span>${amount}</span></td>
+				  <td><span data-prefix>€</span><span></span></td>
 			  </tr>
 		  </table>
 	  </article>
@@ -107,25 +110,49 @@ export default function Pdf() {
   };
   return (
     <View style={styles.container}>
-      <Text>Service Name:</Text>
+      <Text>Company Name</Text>
       <TextInput
-        placeholder="Service"
+        placeholder="Company Name"
         style={styles.input}
         onChangeText={(value) => setName(value)}
+      />
+      <Text>Service</Text>
+      <TextInput
+        placeholder="Service Name"
+        style={styles.input}
+        onChangeText={(value) => setService(value)}
+      />
+      <Text>Description</Text>
+      <TextInput
+        placeholder="Description"
+        style={styles.input}
+        onChangeText={(value) => setDescription(value)}
       />
 
       <Text>Price</Text>
       <TextInput
-        placeholder="Amount"
+        placeholder="Price"
+        keyboardType="numeric"
         style={styles.input}
-        onChangeText={(value) => setAmount(value)}
+        onChangeText={(value) => setPrice(value)}
+      />
+      <Text>Quantity</Text>
+      <TextInput
+        placeholder="Quantity"
+        keyboardType="numeric"
+        style={styles.input}
+        onChangeText={(value) => setQuantity(value)}
       />
 
-      <Button title="Generate PDF" onPress={generatePdf} />
+      <Button
+        style={styles.buttonStyle}
+        title="Generate PDF"
+        onPress={generatePdf}
+      />
 
-      <Text style={styles.result}>
-        Service name: {name}, amount: {amount}
-      </Text>
+      {/* <Text style={styles.result}>
+        Service Name: {name}, Amount: {amount} {currency}
+      </Text> */}
     </View>
   );
 }
@@ -143,5 +170,13 @@ const styles = StyleSheet.create({
     padding: 8,
     margin: 10,
     width: 200,
+  },
+  currency: {
+    borderWidth: 1,
+    borderColor: "#777",
+    padding: 8,
+    margin: 10,
+    width: 100,
+    justifyContent: "",
   },
 });
